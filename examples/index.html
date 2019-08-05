@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FormBuilder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="./js/form-builder.js"></script>
+    <script>
+        /* eslint-disable */
+        // Install plugin and run app
+        document.addEventListener('DOMContentLoaded', function() {
+            Vue.use(FormBuilder)
+            new Vue({ el: '#app' })
+        })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <form-builder></form-builder>
+    </div>
+</body>
+</html>
