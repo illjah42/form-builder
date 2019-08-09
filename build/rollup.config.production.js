@@ -1,11 +1,11 @@
-import vue from 'rollup-plugin-vue'
-import { terser } from 'rollup-plugin-terser'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import commonJs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
-import license from 'rollup-plugin-license'
-import postcss from 'rollup-plugin-postcss'
-import css from 'rollup-plugin-css-only'
+const vue = require('rollup-plugin-vue')
+const { terser } = require('rollup-plugin-terser')
+const nodeResolve = require('rollup-plugin-node-resolve')
+const commonJs = require('rollup-plugin-commonjs')
+const babel = require('rollup-plugin-babel')
+const license = require('rollup-plugin-license')
+const postcss = require('rollup-plugin-postcss')
+const css = require('rollup-plugin-css-only')
 
 const baseConfig = {
     input: './src/entry.js'
@@ -39,7 +39,7 @@ const vuePluginConfig = {
     }
 }
 
-export default [
+module.exports = [
     // ESM
     {
         ...baseConfig,
@@ -50,8 +50,7 @@ export default [
         },
         plugins: [
             ...headPlugins,
-            css({ output: 'dist/css/form-builder.min.css' }),
-            postcss(),
+            postcss({ extract: './dist/css/form-builder.min.css' }),
             vue(vuePluginConfig),
             terser({
                 output: {
@@ -77,12 +76,16 @@ export default [
             ...headPlugins,
             vue({
                 ...vuePluginConfig,
+                css: false,
                 template: {
                     ...vuePluginConfig.template,
                     optimizeSSR: true
                 }
             }),
-            // babel(),
+            css({ output: false }),
+            babel({
+                exclude: 'node_modules/**'
+            }),
             ...tailPlugins
         ]
     },
@@ -93,7 +96,7 @@ export default [
         external,
         output: {
             compact: true,
-            file: 'dist/js/sample.min.js',
+            file: 'dist/js/form-builder.min.js',
             format: 'iife',
             name: 'FormBuilder',
             exports: 'named'
@@ -101,6 +104,7 @@ export default [
         plugins: [
             ...headPlugins,
             vue(vuePluginConfig),
+            css({ output: false }),
             babel({
                 exclude: 'node_modules/**'
             }),

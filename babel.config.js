@@ -5,8 +5,8 @@ module.exports = {
         [
             '@babel/preset-env',
             {
-                useBuiltIns: 'usage',
-                corejs: '2',
+                // useBuiltIns: 'usage',
+                // corejs: '2',
                 targets: isModern ? { esmodules: true } : undefined
                 // debug: true
             }

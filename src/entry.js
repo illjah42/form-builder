@@ -6,6 +6,9 @@
 // Import vue components
 import * as components from './components/index'
 
+// Import styles
+import './style/main.css'
+
 // install function executed by Vue.use()
 
 function install(Vue) {

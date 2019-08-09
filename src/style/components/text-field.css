@@ -1,0 +1,166 @@
+.fb-text-field {
+    position: relative;
+
+    &__element {
+        appearance: none;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: theme('fontSize.base', 1rem);
+        padding: theme('spacing.4', 1rem) theme('spacing.3', 0.75rem);
+        border: 1px solid theme('colors.gray.300');
+        border-radius: theme('borderRadius.default', 0.25rem);
+        color: theme('colors.black', black);
+        background: theme('colors.white', white);
+        transition: 200ms border-color;
+
+        /* reset autofill (firefox)*/
+        filter: none;
+
+        /* reset autofill (chrome) */
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            border-color: theme('colors.gray.300');
+            -webkit-text-fill-color: theme('colors.black', black);
+            -webkit-box-shadow: 0 0 0px 1000px theme('colors.white', white) inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        /* reset :invalid (firefox) */
+        box-shadow: none;
+
+        /* reset ouline (chrome) */
+        &:focus {
+            outline: none;
+            border-color: theme('colors.info.300');
+        }
+
+        &[readonly]:focus {
+            border-color: theme('colors.info.100');
+        }
+    }
+
+
+    /**
+     * Textarea styles
+     */
+    
+    &.is-textarea &__element {
+        resize: vertical;
+    }
+
+
+    /**
+     * Label styles
+     */
+
+    &.has-label &__element {
+        padding-top: theme('spacing.6', 1.5rem);
+        padding-bottom: theme('spacing.2', 0.5rem);
+    }
+
+    &__label {
+        position: absolute;
+        left: theme('spacing.3', 0.75rem);
+        top: theme('spacing.4', 1rem);
+        transform-origin: left top;
+        transition: 100ms transform ease-out-sine;
+    }
+
+    &__element:not([readonly]):focus + &__label,
+    .is-filled &__element + &__label {
+        transform: scale(0.67) translateY(-50%);
+    }
+
+
+    /**
+     * Icon styles
+     */
+    
+    &.has-icon &__element {
+        padding-right: theme('spacing.12', 3rem)
+    }
+
+    &.has-icon &__icon {
+        position: absolute;
+        width: theme('spacing.6', 1.5rem);
+        height: theme('spacing.6', 1.5rem);
+        right: theme('spacing.3', 0.75rem);
+        top:theme('spacing.4', 1rem);
+    }
+
+    &__icon {
+        color: theme('colors.gray.500', gray);
+    }
+
+    &__icon svg {
+        fill: currentColor;
+    }
+
+
+    /**
+     * Error styles
+     */
+
+    &.has-error {
+        animation: 700ms shake ease-out-quad;
+    }
+
+    &.has-error & {
+
+        &__element {
+            border-color: theme('colors.danger.500');
+            /* animation: 700ms shake ease-out-quad; */
+        }
+
+        &__label {
+            color: theme('colors.danger.500');
+        }
+    }
+
+
+    /**
+     * Disabled style
+     */
+    
+    &__element[disabled],
+    &__element[disabled] + &__label {
+        cursor: not-allowed;
+        user-select: none;
+        opacity: .5;
+    }
+}
+
+@keyframes shake {
+ 0%,
+ 100% {
+  transform:translateX(0)
+ }
+ 10% {
+  transform:translateX(-9px)
+ }
+ 20% {
+  transform:translateX(8px)
+ }
+ 30% {
+  transform:translateX(-7px)
+ }
+ 40% {
+  transform:translateX(6px)
+ }
+ 50% {
+  transform:translateX(-5px)
+ }
+ 60% {
+  transform:translateX(4px)
+ }
+ 70% {
+  transform:translateX(-3px)
+ }
+ 80% {
+  transform:translateX(2px)
+ }
+ 90% {
+  transform:translateX(-1px)
+ }
+}

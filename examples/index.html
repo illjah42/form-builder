@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>FormBuilder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/form-builder.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="./js/form-builder.js"></script>
     <script>
@@ -11,13 +12,50 @@
         // Install plugin and run app
         document.addEventListener('DOMContentLoaded', function() {
             Vue.use(FormBuilder)
-            new Vue({ el: '#app' })
+            new Vue({ el: '#app', data: { 
+                noChange: [],
+                radios: null,
+                phones: {},
+                lazy: '',
+                login: '',
+                password: ''
+            } })
         })
     </script>
 </head>
 <body>
     <div id="app">
-        <form-builder></form-builder>
+        <form-builder disabled>
+            <fb-input label="Login" name="login"></fb-input>
+            <fb-password label="Password" type="password" name="password" required></fb-password>
+            <fb-checkbox label="Remember me"></fb-checkbox>
+            <button type="submit" class="mt-4 py-3 px-4 bg-secondary-500 text-white rounded">Submit</button>
+        </form-builder>
+        <form-builder>
+            <template #default="{ currentData, setValue }">
+                <fb-input label="Test" :value="currentData.yo" @input="setValue('yo', $event); noChange && setValue('yoUp', $event.toUpperCase())"></fb-input>
+                <fb-input disabled type="email" placeholder="Bla"></fb-input>
+                <fb-input disabled type="email" label="Mail"></fb-input>
+                <fb-input label="Lazy" v-model.number="lazy" name="lazy_test"></fb-input>
+                <fb-textarea label="Textaera"></fb-textarea>
+                <fb-checkbox label="No change" v-model="noChange" value="bla" required></fb-checkbox>
+                <fb-radio label="Radio one" :value="1" v-model="radios"></fb-radio>
+                <fb-radio label="Radio two" :value="2" v-model="radios"></fb-radio>
+                <fb-radio disabled label="Radio three" :value="3" v-model="radios"></fb-radio>
+                <fb-input label="Capital" :value="currentData.yoUp || currentData.yo" @input="setValue('yoUp', $event.toUpperCase())" :readonly="noChange"></fb-input>
+                <fb-multi-block @removed="$delete(phones, 'phone-' + $event)">
+                    <template #default="{ id }">
+                        <fb-input :label="`Multi ${ id + 1}`" name="inputs[]" v-model="phones['phone-' + id]" required></fb-input>
+                    </template>
+                </fb-multi-block>
+                <button type="submit" class="mt-4 py-3 px-4 bg-secondary-500 text-white rounded">Submit</button>
+            </template>
+        </form-builder>
+        <form-builder>
+            <fb-select label="Select value" :options="[{text:'1', value:'1'}, {text:'Bla', value: 'bla'}]" v-model="radios"></fb-select>
+            <button type="submit" class="mt-4 py-3 px-4 bg-secondary-500 text-white rounded">Submit</button>
+        </form-builder>
+        <!-- <pre>{{ $data }}</pre> -->
     </div>
 </body>
 </html>

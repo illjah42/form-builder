@@ -1,0 +1,17 @@
+.fb-multi-block {
+    
+    &__field.has-remove {
+        position: relative;
+        padding-right: 50px;
+    }
+
+    &__remove {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    &__add {
+        margin-top: theme('spacing.2', 0.5rem);
+    }
+}

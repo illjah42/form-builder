@@ -1,25 +1,39 @@
 <template>
-    <div class="the-example">
-        {{ message }}
-    </div>
+    <form class="form-builder">
+        <slot :currentData="currentData" :setValue="setValue" />
+    </form>
 </template>
 
 <script>
 export default {
-    name: 'TheExample',
+    name: 'FormBuilder',
 
     props: {
-        message: {
-            type: String,
-            default: 'Hello world!'
+        formData: {
+            type: Object,
+            default: () => ({})
+        }
+    },
+
+    data() {
+        return {
+            editedData: {}
+        }
+    },
+
+    computed: {
+        currentData() {
+            return {
+                ...this.formData,
+                ...this.editedData
+            }
+        }
+    },
+
+    methods: {
+        setValue(path, value) {
+            this.$set(this.editedData, path, value)
         }
     }
 }
 </script>
-
-<style>
-.the-example {
-    border: 1px solid lightgray;
-    padding: 1.5rem;
-}
-</style>

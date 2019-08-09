@@ -1,12 +1,12 @@
-import vue from 'rollup-plugin-vue'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import json from 'rollup-plugin-json'
-import commonJs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
-import postcss from 'rollup-plugin-postcss'
-// import { eslint } from 'rollup-plugin-eslint'
+const vue = require('rollup-plugin-vue')
+const nodeResolve = require('rollup-plugin-node-resolve')
+const json = require('rollup-plugin-json')
+const commonJs = require('rollup-plugin-commonjs')
+const babel = require('rollup-plugin-babel')
+// const { eslint } = require('rollup-plugin-eslint')
+const postcss = require('rollup-plugin-postcss')
 
-export default {
+module.exports = {
     input: './src/entry.js',
     output: {
         name: 'FormBuilder',
@@ -16,6 +16,7 @@ export default {
     },
     plugins: [
         vue(),
+        postcss({ extract: './dist/css/form-builder.css' }),
         commonJs({
             include: 'node_modules/**'
         }),
@@ -23,7 +24,6 @@ export default {
             mainFields: ['module', 'main', 'jsnext:main']
         }),
         json(),
-        postcss(),
         babel({
             exclude: 'node_modules/**'
         })

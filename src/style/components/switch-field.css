@@ -1,0 +1,91 @@
+.fb-switch-field {
+    position: relative;
+    padding: theme('spacing.2', 0.5rem) 0;
+
+    &__element {
+        cursor: pointer;
+        appearance: none;
+        vertical-align: middle;
+        width: theme('spacing.5', 1.25rem);
+        height: theme('spacing.5', 1.25rem);
+        margin-left: theme('spacing.3', 0.75rem);
+        border: 1px solid theme('colors.gray.300');
+        color: theme('colors.secondary.500', blue);
+        background: theme('colors.white', white);
+
+        /* reset :invalid (firefox) */
+        box-shadow: none;
+
+        &:checked {
+            border-color: transparent;
+            background: currentColor center no-repeat;
+            background-size: 100% 100%;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: theme('colors.info.300');
+        }
+
+        /* &:checked:focus {
+            border-color: theme('colors.info.700');
+        } */
+    }
+
+
+    /**
+     * Checkbox
+     */
+
+    &.is-checkbox &__element {
+        border-radius: theme('borderRadius.default', 0.25rem);
+
+        &:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+        }
+    }
+
+
+    /**
+     * Radio
+     */
+
+    &.is-radio &__element {
+        border-radius: 50%;
+
+        &:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+    }
+
+
+    /**
+     * Label styles
+     */
+    &__element + &__label {
+        padding-left: theme('spacing.2', 0.5rem);
+        cursor: pointer;
+        vertical-align: middle;
+    }
+
+
+    /**
+     * Error styles
+     */
+
+    &.has-error &__element {
+        border-color: theme('colors.danger.500');
+    }
+
+
+    /**
+     * Disabled style
+     */
+    
+    &__element[disabled],
+    &__element[disabled] + &__label {
+        cursor: not-allowed;
+        user-select: none;
+        opacity: .5;
+    }
+}

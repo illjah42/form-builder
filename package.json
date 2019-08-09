@@ -1,12 +1,14 @@
 {
     "name": "@awes-io/form-builder",
-    "version": "0.0.1",
-    "main": "dist/form-builder.ssr.js",
-    "module": "dist/form-builder.esm.js",
-    "unpkg": "dist/form-builder.min.js",
+    "version": "0.1.1",
+    "main": "dist/js/form-builder.ssr.js",
+    "module": "dist/js/form-builder.esm.js",
+    "unpkg": "dist/js/form-builder.min.js",
     "files": [
         "dist/*",
-        "src/**/*.vue"
+        "src/components/*",
+        "src/mixins/*",
+        "src/style/*"
     ],
     "scripts": {
         "clean": "rimraf dist",
@@ -33,6 +35,7 @@
     "license": "MIT",
     "dependencies": {
         "core-js": "^2.6.5",
+        "tailwindcss": "^1.0.6",
         "vue": "^2.6.10"
     },
     "devDependencies": {
@@ -57,7 +60,10 @@
         "jest": "^24.8.0",
         "jest-serializer-vue": "^2.0.2",
         "jest-transform-stub": "^2.0.0",
+        "postcss-discard-empty": "^4.0.1",
+        "postcss-easings": "^2.0.0",
         "postcss-import": "^12.0.1",
+        "postcss-nested": "^4.1.2",
         "prettier": "^1.18.2",
         "rimraf": "^2.6.3",
         "rollup": "^1.17.0",

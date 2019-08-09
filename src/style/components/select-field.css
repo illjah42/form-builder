@@ -1,0 +1,59 @@
+.fb-select-field {
+    position: relative;
+
+    &__element {
+        appearance: none;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: theme('fontSize.base', 1rem);
+        padding: theme('spacing.4', 1rem) theme('spacing.3', 0.75rem);
+        padding-right: theme('spacing.10', 2.5rem);
+        border: 1px solid theme('colors.gray.300');
+        border-radius: theme('borderRadius.default', 0.25rem);
+        color: theme('colors.black', black);
+        background: theme('colors.white', white);
+        transition: 200ms border-color;
+
+        /* disable dotted inset line (firefox) */
+        &:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 #000;
+        }
+
+        &:focus {
+            border-color: theme('colors.info.300');
+        }
+
+        &[readonly]:focus {
+            border-color: theme('colors.info.100');
+        }
+        
+        /* arrow */
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23757575'%3e%3cpath d='M15.3 9.3a1 1 0 0 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4l3.3 3.29 3.3-3.3z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1.5em 1.5em;
+    }
+
+    /**
+     * Label styles
+     */
+
+    &.has-label &__element {
+        padding-top: theme('spacing.6', 1.5rem);
+        padding-bottom: theme('spacing.2', 0.5rem);
+    }
+
+    &__label {
+        position: absolute;
+        left: theme('spacing.3', 0.75rem);
+        top: theme('spacing.4', 1rem);
+        transform-origin: left top;
+        transition: 100ms transform ease-out-sine;
+    }
+
+    &__element:not([readonly]):focus + &__label,
+    .is-filled &__element + &__label {
+        transform: scale(0.67) translateY(-50%);
+    }
+}
